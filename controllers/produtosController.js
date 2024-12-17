@@ -7,48 +7,46 @@ var get = function (req, res) {
 
 var get = function (req, res) {
 
-	Produto.find(function (err, produtos) {
-
-		if (err) {
-			res.status(500);
-			res.send("Erro interno do servidor");
-		}
-		else {
+	Produto.find()
+		.then(function (produtos) {
 			res.status(200);
 			res.send(produtos);
-		}
-	});
+		})
+		.catch(function (err) {
+			res.status(500);
+			res.send("Erro interno do servidor");
+		});
+
 };
 
 var getById = function (req, res) {
 
-	Produto.findById(req.params.id, function (err, produto) {
+	var id = req.params.id;
 
-		if (err) {
-			res.status(404);
-			res.send("Produto não encontrado...");
-		}
-		else {
+	Produto.findById(id)
+		.then(function (produto) {
 			res.status(200);
 			res.send(produto);
-		}
-	})
+		})
+		.catch(function (err) {
+			res.status(404);
+			res.send("Produto não encontrado...");
+		});
 };
 
 var add = function (req, res) {
 
 	var produto = new Produto(req.body);
 
-	produto.save(function (err) {
-		if (err) {
-			res.status(500);
-			res.send("Erro : falha ao incluir produto...");
-		}
-		else {
+	produto.save()
+		.then(() => {
 			res.status(201);
 			res.send(produto);
-		}
-	})
+		})
+		.catch(function (err) {
+			res.status(500);
+			res.send("Erro : falha ao incluir produto...");
+		});
 };
 
 module.exports = {
