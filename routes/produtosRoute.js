@@ -9,6 +9,8 @@ produtosRouter.route('').get(function (req, res) {
 });
 */
 
-produtosRouter.route('').get(produtosController);
+produtosRouter.route('')
+	.get(produtosController.get)
+	.post(produtosController.add);
 
 module.exports = produtosRouter;
