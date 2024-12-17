@@ -13,4 +13,7 @@ produtosRouter.route('')
 	.get(produtosController.get)
 	.post(produtosController.add);
 
+produtosRouter.route('/:id')
+	.get(produtosController.getById);
+
 module.exports = produtosRouter;
