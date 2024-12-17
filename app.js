@@ -1,6 +1,8 @@
 var express = require("express");
 var mongoose = require("mongoose");
 
+var produtosRouter = require('./routes/produtosRoute');
+
 var app = express();
 var router = express.Router();
 
@@ -29,3 +31,4 @@ router.get('/teste', function (req, res) {
 
 // Aplica as rotas em nossa aplicação
 app.use('/', router);
+app.use('/produtos', produtosRouter);
