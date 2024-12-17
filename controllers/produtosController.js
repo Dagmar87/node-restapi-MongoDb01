@@ -20,6 +20,21 @@ var get = function (req, res) {
 	});
 };
 
+var getById = function (req, res) {
+
+	Produto.findById(req.params.id, function (err, produto) {
+
+		if (err) {
+			res.status(404);
+			res.send("Produto não encontrado...");
+		}
+		else {
+			res.status(200);
+			res.send(produto);
+		}
+	})
+};
+
 var add = function (req, res) {
 
 	var produto = new Produto(req.body);
@@ -38,5 +53,6 @@ var add = function (req, res) {
 
 module.exports = {
 	add: add,
-	get: get
+	get: get,
+	getById: getById
 };
